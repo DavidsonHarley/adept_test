@@ -1,0 +1,40 @@
+.button {
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s ease, transform 0.2s;
+    color: white;
+  
+    &:hover {
+      transform: scale(1.05);
+    }
+  
+    &:active {
+      transform: scale(0.95);
+    }
+  
+    &:disabled {
+      background: #555;
+        cursor: not-allowed;
+        opacity: 0.5;
+    }
+  }
+  
+  .delete {
+    background: #ff4d4d; 
+  }
+  
+  .add {
+    background: #4166d5;
+  }
+  
+  .edit {
+    background: orange;
+  }
+  
+  .cancel {
+    background: gray;
+  }

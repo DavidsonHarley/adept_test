@@ -1,0 +1,74 @@
+/* Общие стили для инпутов */
+.wrapper {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+  }
+  
+  .input {
+    width: 100%;
+    max-width: 300px;
+    height: 40px;
+    background-color: #404045;
+    border-radius: 24px;
+    border: 1px solid transparent;
+    padding: 0 20px;
+    color: #a8a8a8;
+    font-size: 14px;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+  }
+  
+  .input:hover {
+    cursor: pointer;
+    background-color: #505055;
+  }
+  
+  .input:focus {
+    outline: none;
+    background-color: #505055;
+  }
+  
+  /* Стили для чекбокса */
+  .checkboxWrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .checkbox {
+    display: none; /* Прячем стандартный чекбокс */
+  }
+  
+  .checkmark {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #3498db;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+  
+  .checkmark::after {
+    content: "";
+    width: 10px;
+    height: 10px;
+    background-color: #3498db;
+    display: none;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+  
+  .checkbox:checked + .checkmark::after {
+    display: block;
+  }
+  
+  .checkbox:checked + .checkmark {
+    background-color: #3498db;
+    border-color: #3498db;
+  }
+  

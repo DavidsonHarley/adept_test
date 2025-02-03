@@ -1,0 +1,17 @@
+.row_items{
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #5a5a69;
+    max-width: 1500px;
+}
+
+
+.item{
+    display: flex;
+}
+
+.action_button{
+    display: flex;
+    gap: 10px;
+}
