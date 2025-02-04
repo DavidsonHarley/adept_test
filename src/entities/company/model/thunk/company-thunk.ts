@@ -6,7 +6,7 @@ export const fetchCompanyThunk = createAsyncThunk(
     'companyTable/fetchCompany',
     async (page: number) => {
       const response = await jsonApiInstance<{data: Company[]}>(
-        `/companies?_page=${page}&_per_page=10`
+        `/companies?_page=${page}&_per_page=50`
       );
       return response.data;
     }

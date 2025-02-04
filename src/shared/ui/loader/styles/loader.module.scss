@@ -1,0 +1,30 @@
+.loader {
+    width: 40px;
+    height: 40px;
+    border: 8px solid rgba(255, 255, 255, 0.1);
+    border-top: 8px solid #00ff22;
+    border-radius: 50%;
+    animation: spin 1.5s linear infinite, neonGlow 1.5s ease-in-out infinite;
+    box-shadow: 0 0 10px #00ff22, 0 0 20px #00ff22, 0 0 3cqmin #00ff22;
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  @keyframes neonGlow {
+    0% {
+      box-shadow: 0 0 10px #00ff22, 0 0 20px #00ff22, 0 0 30px #00ff22;
+    }
+    50% {
+      box-shadow: 0 0 20px #00ff22, 0 0 30px #00ff22, 0 0 40px #00ff22;
+    }
+    100% {
+      box-shadow: 0 0 10px #00ff22, 0 0 20px #00ff22, 0 0 30px #00ff22;
+    }
+  }

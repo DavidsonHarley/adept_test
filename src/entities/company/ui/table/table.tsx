@@ -27,9 +27,9 @@ export function Table({
             onChange={() => handleToggleSelectAll()}
           />
         </div>
-        <div className={cls.item_header}> Name</div>
-        <div className={cls.item_header}> Address</div>
-        <div className={cls.item_header}> Actions</div>
+        <div className={cls.item_header}>Название компании</div>
+        <div className={cls.item_header}>Адрес</div>
+        <div className={cls.item_header}>Событие</div>
       </div>
       {data ? (
         data?.map((el: any) => (

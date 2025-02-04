@@ -6,6 +6,7 @@ import { Table } from "./ui/table/table";
 import { HeaderActions } from "./ui/header-actions/header-actions";
 import { fetchCompanyThunk } from "./model/thunk/company-thunk";
 import cls from "../company/styles/companies-table.module.scss";
+import Loader from "../../shared/ui/loader/loader";
 
 export function CompaniesTable() {
   const [addFormCompany, setAddFormCompany] = useState({
@@ -16,8 +17,11 @@ export function CompaniesTable() {
     name: "",
     address: "",
   });
+  const [loadedPages, setLoadedPages] = useState(new Set());
+  const [isFetching, setIsFetching] = useState(false);
   const [edit, setEditId] = useState<number>(0);
   const loader = useRef<HTMLDivElement | null>(null);
+  const prevScrollY = useRef(0);
   const dispatch = useAppDispatch();
   const { data, loading, error, selectedCompanies, currentPage, hasMore } =
     useAppSelector((state) => state.company);
@@ -37,27 +41,38 @@ export function CompaniesTable() {
   }, []);
 
   useEffect(() => {
-    if (loader.current) {
-      const options = {
-        root: null,
-        rootMargin: "20px",
-        threshold: 1.0,
-      };
+    if (!loader.current || isFetching) return;
 
-      const observer = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting && !loading && hasMore) {
-          dispatch(fetchCompanyThunk(currentPage + 1));
-          if (loader.current) {
-            loader.current.scrollIntoView({ behavior: "smooth", block: "end" });
-          }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (
+          entries[0].isIntersecting &&
+          !loading &&
+          hasMore &&
+          !loadedPages.has(currentPage + 1)
+        ) {
+          setIsFetching(true);
+          prevScrollY.current = window.scrollY;
+          dispatch(fetchCompanyThunk(currentPage + 1))
+            .then(() => {
+              setLoadedPages((prev) => new Set(prev).add(currentPage + 1));
+              setIsFetching(false);
+              requestAnimationFrame(() => {
+                window.scrollTo(0, prevScrollY.current);
+              });
+            })
+            .catch(() => {
+              setIsFetching(false);
+            });
         }
-      }, options);
+      },
+      { root: null, rootMargin: "20px", threshold: 1.0 },
+    );
 
-      observer.observe(loader.current);
-    }
-  }, [currentPage, loading, hasMore, dispatch]);
+    observer.observe(loader.current);
 
-  if (loading) return <div>Loading...</div>;
+    return () => observer.disconnect();
+  }, [currentPage, loading, hasMore, dispatch, loadedPages, isFetching]);
 
   if (error) return <div>Error: {error}</div>;
 
@@ -87,6 +102,7 @@ export function CompaniesTable() {
         handleToggleSelectAll={handleToggleSelectAll}
       />
       <div ref={loader}></div>
+      <div className={cls.ctnLoader}>{loading && <Loader />}</div>
     </div>
   );
 }

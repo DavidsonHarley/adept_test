@@ -10,13 +10,15 @@ import {
   deleteAllCompaniesThunk,
   updateCompanyThunk,
 } from "../model/thunk/company-thunk";
+import { CompanyForm } from "../model/types/company-types";
+import { Dispatch, SetStateAction } from "react";
 
 export function useCompanyTable() {
   const dispatch = useAppDispatch();
   const handleInputAdd = (
     e: React.ChangeEvent<HTMLInputElement>,
-    setAddFormCompany: any,
-    addFormCompany: any,
+    setAddFormCompany: Dispatch<SetStateAction<CompanyForm>>,
+    addFormCompany: CompanyForm,
   ) => {
     const { name, value } = e.target;
     setAddFormCompany({ ...addFormCompany, [name]: value });
@@ -24,8 +26,8 @@ export function useCompanyTable() {
 
   const handleInputEdit = (
     e: React.ChangeEvent<HTMLInputElement>,
-    setEditForm: any,
-    editForm: any,
+    setEditForm: Dispatch<SetStateAction<CompanyForm>>,
+    editForm: CompanyForm,
   ) => {
     const { name, value } = e.target;
     setEditForm({ ...editForm, [name]: value });
@@ -33,9 +35,9 @@ export function useCompanyTable() {
 
   const handleSubmit = (
     e: React.FormEvent<HTMLFormElement>,
-    addFormCompany: any,
-    setEditForm: any,
-    setAddFormCompany: any,
+    addFormCompany: CompanyForm,
+    setEditForm: Dispatch<SetStateAction<CompanyForm>>,
+    setAddFormCompany: Dispatch<SetStateAction<CompanyForm>>,
   ) => {
     e.preventDefault();
     dispatch(addCompanyThunk(addFormCompany));
@@ -57,7 +59,12 @@ export function useCompanyTable() {
     dispatch(deleteAllCompaniesThunk());
     toast.success("Компании удалены");
   };
-  const handleSaveChanges = (id: number, editForm: any, setEditId: any) => {
+  const handleSaveChanges = (
+    id: number,
+    editForm: CompanyForm,
+    setEditId: Dispatch<SetStateAction<number>>,
+    setEditForm: Dispatch<SetStateAction<CompanyForm>>,
+  ) => {
     dispatch(
       updateCompanyThunk({
         id: id,
@@ -67,7 +74,8 @@ export function useCompanyTable() {
     )
       .then(() => {
         toast.success("Компания успешно обновлена");
-        setEditId(0); // Закрытие режима редактирования
+        setEditId(0);
+        setEditForm({ name: "", address: "" });
       })
       .catch((error: any) => {
         toast.error(error || "Ошибка при обновлении компании");

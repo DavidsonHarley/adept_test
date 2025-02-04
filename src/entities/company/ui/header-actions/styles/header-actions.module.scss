@@ -2,5 +2,12 @@
     display: flex;
     justify-content: space-between;
     gap: 50px;
-    
+   @media screen and (max-width: 479px) {
+        flex-direction: column;
+        gap: 10px;
+   } 
+}
+
+.ctnDeleteAll{
+    padding-top: 34px;
 }

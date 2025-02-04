@@ -1,4 +1,3 @@
-/* Общие стили для инпутов */
 .wrapper {
     display: flex;
     align-items: center;
@@ -30,7 +29,6 @@
     background-color: #505055;
   }
   
-  /* Стили для чекбокса */
   .checkboxWrapper {
     display: flex;
     align-items: center;
@@ -38,7 +36,7 @@
   }
   
   .checkbox {
-    display: none; /* Прячем стандартный чекбокс */
+    display: none;
   }
   
   .checkmark {

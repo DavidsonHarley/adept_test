@@ -40,21 +40,15 @@ export const companyTableSlice = createSlice({
           })
           .addCase(fetchCompanyThunk.fulfilled, (state, action) => {
             state.loading = false;
-        
-            // Получаем новые данные
             const newCompanies = action.payload;
-        
-            // Фильтруем только те, которых еще нет в state.data
             const filteredCompanies = newCompanies.filter(
                 (company) => !state.data.some((existingCompany) => existingCompany.id === company.id)
             );
-        
-            // Добавляем только новые компании
-            state.data = [...state.data, ...filteredCompanies];
-        
-            // Обновляем состояние для пагинации
-            state.currentPage += 1;
-            state.hasMore = filteredCompanies.length === 10; // Если загружено меньше 50, значит больше нет данных
+            if (filteredCompanies.length > 0) {
+                state.data = [...state.data, ...filteredCompanies];
+                state.currentPage += 1;
+            }
+            state.hasMore = filteredCompanies.length === 50;
         })
         
           .addCase(fetchCompanyThunk.rejected, (state, action) => {

@@ -4,14 +4,21 @@
     padding-bottom: 8px;
     border-bottom: 1px solid #5a5a69;
     max-width: 1500px;
+    @media screen and (max-width: 490px) {
+          flex-direction: column;  
+          gap: 10px;
+    }
 }
-
 
 .item{
     display: flex;
+    padding-left: 10px;
+    max-width: 200px;
+    word-break: break-all;
 }
 
 .action_button{
     display: flex;
+    padding-left: 10px;
     gap: 10px;
 }

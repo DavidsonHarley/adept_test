@@ -1,4 +1,4 @@
-import Button from "../../../../shared/ui/Buton/button";
+import Button from "../../../../shared/ui/Button/button";
 import { Input } from "../../../../shared/ui/Input/Input";
 import cls from "../../ui/table-row/styles/table-row.module.scss";
 
@@ -42,7 +42,7 @@ export function TableRow({
           <div className={cls.action_button}>
             <Button
               variant="add"
-              onClick={() => handleSaveChanges(el?.id, editForm, setEditId)}
+              onClick={() => handleSaveChanges(el?.id, editForm, setEditId, setEditForm)}
             >
               Сохранить
             </Button>

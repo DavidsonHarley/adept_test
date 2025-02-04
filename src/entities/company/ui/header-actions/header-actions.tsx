@@ -1,4 +1,4 @@
-import Button from "../../../../shared/ui/Buton/button";
+import Button from "../../../../shared/ui/Button/button";
 import { Input } from "../../../../shared/ui/Input/Input";
 import { AddForm } from "../add-form/add-form";
 import cls from "./styles/header-actions.module.scss";
@@ -14,13 +14,15 @@ export function HeaderActions({
 }: any) {
   return (
     <div className={cls.header_actions}>
-      <Button
-        variant="delete"
-        onClick={() => handleDeleteAllCompanies()}
-        disabled={disabled}
-      >
-        Удалить выбранные Компании
-      </Button>
+      <div className={cls.ctnDeleteAll}>
+        <Button
+          variant="delete"
+          onClick={() => handleDeleteAllCompanies()}
+          disabled={disabled}
+        >
+          Удалить все компании
+        </Button>
+      </div>
       <AddForm
         onSubmit={(e: any) =>
           handleSubmit(e, addFormCompany, setEditForm, setAddFormCompany)
@@ -42,6 +44,7 @@ export function HeaderActions({
           name="address"
           type="text"
         />
+        <Button variant="add">Добавить компанию</Button>
       </AddForm>
     </div>
   );
