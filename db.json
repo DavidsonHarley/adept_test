@@ -1,16 +1,6 @@
 {
   "companies": [
     {
-      "id": "12",
-      "name": "AI Robotics Corp.",
-      "address": "2323 Bot Street, San Jose, CA, USA"
-    },
-    {
-      "id": "13",
-      "name": "AI Robotics Corp.",
-      "address": "2323 Bot Street, San Jose, CA, USA"
-    },
-    {
       "id": "14",
       "name": "AI Robotics Corp.",
       "address": "2323 Bot Street, San Jose, CA, USA"
@@ -2576,19 +2566,9 @@
       "address": "7676 Safe Avenue, Washington, DC, USA"
     },
     {
-      "id": "528",
-      "name": "Green Security Systems",
-      "address": "7676 Safe Avenue, Washington, DC, USA"
-    },
-    {
-      "id": "529",
-      "name": "Green Security Systems",
-      "address": "7676 Safe Avenue, Washington, DC, USA"
-    },
-    {
-      "id": "d653",
-      "name": "assasssssad123123",
-      "address": "1123asdsd"
+      "id": "f4e1",
+      "name": "asd",
+      "address": "asd"
     }
   ]
 }

@@ -5,8 +5,7 @@ import { useCompanyTable } from "./hooks/use-company-table";
 import { Table } from "./ui/table/table";
 import { HeaderActions } from "./ui/header-actions/header-actions";
 import { fetchCompanyThunk } from "./model/thunk/company-thunk";
-import cls from "../company/styles/companies-table.module.scss";
-import Loader from "../../shared/ui/loader/loader";
+import { Layout } from "./ui/layout/layout";
 
 export function CompaniesTable() {
   const [addFormCompany, setAddFormCompany] = useState({
@@ -77,7 +76,7 @@ export function CompaniesTable() {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <div className={cls.content}>
+    <Layout loader={loader} loading={loading}>
       <HeaderActions
         handleDeleteAllCompanies={handleDeleteAllCompanies}
         handleInputAdd={handleInputAdd}
@@ -101,8 +100,6 @@ export function CompaniesTable() {
         setEditId={setEditId}
         handleToggleSelectAll={handleToggleSelectAll}
       />
-      <div ref={loader}></div>
-      <div className={cls.ctnLoader}>{loading && <Loader />}</div>
-    </div>
+    </Layout>
   );
 }
