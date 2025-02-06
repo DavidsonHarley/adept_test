@@ -1,5 +1,4 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../shared/lib/store";
 import { useCompanyTable } from "./hooks/use-company-table";
 import { Table } from "./ui/table/table";
@@ -16,7 +15,7 @@ export function CompaniesTable() {
     name: "",
     address: "",
   });
-  const [loadedPages, setLoadedPages] = useState(new Set());
+  const loadedPages = useMemo(() => new Set(), []);
   const [isFetching, setIsFetching] = useState(false);
   const [edit, setEditId] = useState<number>(0);
   const loader = useRef<HTMLDivElement | null>(null);
@@ -54,7 +53,7 @@ export function CompaniesTable() {
           prevScrollY.current = window.scrollY;
           dispatch(fetchCompanyThunk(currentPage + 1))
             .then(() => {
-              setLoadedPages((prev) => new Set(prev).add(currentPage + 1));
+              loadedPages.add(currentPage + 1);
               setIsFetching(false);
               requestAnimationFrame(() => {
                 window.scrollTo(0, prevScrollY.current);
