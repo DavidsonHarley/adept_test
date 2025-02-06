@@ -15,7 +15,7 @@ export function CompaniesTable() {
     name: "",
     address: "",
   });
-  const loadedPages = useMemo(() => new Set(), []);
+  const [loadedPages, setLoadedPages] = useState(new Set());
   const [isFetching, setIsFetching] = useState(false);
   const [edit, setEditId] = useState<number>(0);
   const loader = useRef<HTMLDivElement | null>(null);
@@ -53,7 +53,7 @@ export function CompaniesTable() {
           prevScrollY.current = window.scrollY;
           dispatch(fetchCompanyThunk(currentPage + 1))
             .then(() => {
-              loadedPages.add(currentPage + 1);
+              setLoadedPages((prev) => new Set(prev).add(currentPage + 1));
               setIsFetching(false);
               requestAnimationFrame(() => {
                 window.scrollTo(0, prevScrollY.current);
